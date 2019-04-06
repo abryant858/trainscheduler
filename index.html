@@ -117,7 +117,7 @@
             name: trainName,
             destination: trainDestination,
             firstTrain: firstTrain,
-                frequency: trainFrequency
+            frequency: trainFrequency
         })
         
         //$('#train-name, #train-destination, #first-train, #train-frequency').val('')
@@ -133,7 +133,7 @@
         var minutesAway = mAway()
         console.log(nextArrival)
         console.log(minutesAway)
-
+        //
         $('#table-data').append(tableRow)
         $(tableRow).append('<td>' + childSnapshot.val().name + '</td>')
         $(tableRow).append('<td>' + childSnapshot.val().destination + '</td>')
@@ -141,10 +141,9 @@
         $(tableRow).append('<td>' + nextArrival + '</td>')
         $(tableRow).append('<td>' + minutesAway + '</td>')
 
-        
-
+        //Functions calulates arrival of next train.
         function nArrival() {
-            var firstTimeConverted = moment(childSnapshot.val().firstTrain, "HH:mm").subtract(1, "years");
+            var firstTimeConverted = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
             console.log(firstTimeConverted)
 
             var currentTime = moment();
@@ -163,9 +162,9 @@
             console.log("ARRIVAL TIME: " + moment(nextArrival).format("hh:mm"));
             return moment(nextArrival).format("hh:mm a")
         }
-
+        //Function calculates how many minutes until the next train arrival.
         function mAway() {
-            var firstTimeConverted = moment(childSnapshot.val().firstTrain, "HH:mm").subtract(1, "years");
+            var firstTimeConverted = moment(childSnapshot.val().firstTrain, "hh:mm").subtract(1, "years");
             var currentTime = moment();
             var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
             var tRemainder = diffTime % childSnapshot.val().frequency;
